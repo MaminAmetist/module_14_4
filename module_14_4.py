@@ -71,13 +71,13 @@ async def main_menu(message):
 
 @dp.message_handler(text='Купить')
 async def get_buying_list(message):
+    initiate_db()
     products = get_all_products()
     for i in range(len(medicine_list)):
         with open(medicine_list[i], 'rb') as img:
             await message.answer_photo(img, f'Название: Product {products[i][1]}\n'
                                             f'Описание: {products[i][2]}\n'
                                             f'Цена: {products[i][3]}')
-    connection.close()
     await message.answer('Выберите продукт:', reply_markup=medicine_kb)
 
 
