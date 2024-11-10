@@ -16,21 +16,25 @@ def initiate_db():
 
 
 def create_products():
+    connection.commit()
     medicine_list = ['catharsis', 'nostalgia', 'relax', 'smile']
     vitamine_list = ['радостин', 'ностальгиксин', 'релаксин', 'пакостин']
     for i in range(len(medicine_list)):
         cursor.execute(f"INSERT INTO Products ('id', 'title', 'description', 'price') VALUES (?, ?, ?, ?)",
                        (f'{i + 1}', f'{medicine_list[i]}', f'{vitamine_list[i]}', f'{(i + 1) * 100}'))
+    connection.close()
 
 
 def get_all_products():
+    connection.commit()
     cursor.execute('SELECT * FROM Products')
     products = cursor.fetchall()
+    connection.close()
     return products
 
 
-initiate_db()
+# initiate_db()
 # create_products()
-get_all_products()
-connection.commit()
+# get_all_products()
+# connection.commit()
 # connection.close()
